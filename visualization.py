@@ -423,7 +423,7 @@ def main():
 
     image_path = sys.argv[1]
     output_path = "output_visualization.png"
-    threshold = 0.05   # ink-density ratio below which a row/col is a basin
+    threshold = 0.05 # ink-density ratio below which a row/col is a basin
     merge_threshold = 3 # merge adjacent basins separated by <= this many pixels
 
     # parse optional command-line flags
@@ -482,7 +482,7 @@ def main():
         sys.exit(1)
 
     """Step 6: build graph 
-    BorderGraph creates one GapNode per (row_basin × col_basin) intersection,
+    BorderGraph creates one GapNode per (row_basin x col_basin) intersection,
     connects adjacent nodes with GapEdges, runs the shrink algorithm on every
     edge, and flags isolated/dead-end nodes and weak edges.
     """
