@@ -1,3 +1,4 @@
 # CS-Directed-Research
 
-Sohni Tagirisa Directed Research under Professor Justin Li.
+Directed Research by Sohni Tagirisa under Professor Justin Li 
+Occidental College, Spring 2026
