@@ -1,3 +1,3 @@
 # CS-Directed-Research
 
-Sohni Tagirisa Directed CS Research under Professor Justin Li.
+Sohni Tagirisa Directed Research under Professor Justin Li.
