@@ -22,7 +22,7 @@ BorderGraph:
     - weak edges flagged (strength < threshold, unreliable)
 """
 
-""" this import makes all type annotations in this file lazy (treated as strings)
+""" This import makes all type annotations in this file lazy (treated as strings)
 rather than evaluated immediately. this lets us reference GapEdge inside GapNode
 and GapNode inside GapEdge without python complaining that one isn't defined yet."""
 from __future__ import annotations
@@ -88,7 +88,7 @@ def find_basins(array, dimension, threshold, merge_threshold=0):
             first_value = value
         prev_value = value
 
-    # don't forget to save the last basin after the loop ends
+    # saves the last basin after the loop ends
     basins.append((first_value, prev_value))
 
     # merge adjacent basins whose gap is within merge_threshold pixels
@@ -402,7 +402,7 @@ class BorderGraph:
     # step 3: shrink basins where characters bleed into the gap
 
     def _shrink_edges(self):
-        """precompute how tall/wide the perpendicular scan slice should be for
+        """Precompute how tall/wide the perpendicular scan slice should be for
         each basin. this uses the midpoint between adjacent basin edges.
         example: if row basin i ends at row 50 and row basin i+1 starts at
         row 60, the midpoint is 55. this is used as the boundary between
@@ -465,7 +465,7 @@ class BorderGraph:
                 e.x2_shrunk = x2_agg
 
     def _find_minimum_pos(self, slices_iter, start_falling=False):
-        """walks through (position, ink_count) pairs looking for the minimum.
+        """Walks through (position, ink_count) pairs looking for the minimum.
         
         start_falling=False (default): starts in RISING phase, waits for ink
         to increase before tracking the minimum. use this when the walk starts
@@ -728,7 +728,7 @@ class BorderGraph:
                 continue
 
             if edge.orientation == 'H':
-                """horizontal original edge -> pink ticks are vertical lines.
+                """Horizontal original edge -> pink ticks are vertical lines.
                 figure out where the tick starts and ends vertically
                 by finding the neighboring row basin centers (node above and below). """
                 ri = next((i for i, rb in enumerate(self.row_basins) if basin_center(rb) == edge.node_a.row), None)
@@ -755,7 +755,7 @@ class BorderGraph:
                         na.edges.append(se)
                         nb.edges.append(se)
             else:
-                """ vertical original edge -> pink ticks are horizontal lines.
+                """ Vertical original edge -> pink ticks are horizontal lines.
                 figure out where the tick starts and ends horizontally
                 by finding the neighboring col basin centers (node left and right). """
                 ci = next((i for i, cb in enumerate(self.col_basins) if basin_center(cb) == edge.node_a.col), None)
@@ -765,7 +765,7 @@ class BorderGraph:
                 else:
                     c_left = edge.node_a.col_start
                     c_right = edge.node_a.col_end
-                """ make one horizontal edge at x1_shrunk and one at x2_shrunk.
+                """ Make one horizontal edge at x1_shrunk and one at x2_shrunk.
                     deduplicate by (r, col_basin_center): if two V-edges in the
                     same col basin produce the same shrunk row we only draw one """
                 # tick, preventing the triple-line bug.
