@@ -29,10 +29,10 @@ def load_and_preprocess(image_path):
     Load an image from disk and convert it to a binary ink mask.
 
     Returns:
-        img_bgr  : the original colour image (H x W x 3, uint8, BGR order)
+        img_bgr: the original colour image (H x W x 3, uint8, BGR order)
                    kept so we can draw coloured overlays on it later
-        inverted : binary array where 1 = ink pixel, 0 = background
-                   this is the convention used throughout — ink is "foreground"
+        inverted: binary array where 1 = ink pixel, 0 = background
+                   this is the convention used throughout- ink is "foreground"
     """
  
     img_bgr = cv2.imread(image_path)
@@ -64,7 +64,7 @@ def crop_to_content(array):
     Returns:
         cropped: the sub-array containing just the page
         r0, c0: the row and column offsets of the crop within the original
-                     image — needed later to convert cropped coordinates back
+                     image— needed later to convert cropped coordinates back
                      to original-image coordinates when drawing
     """
     # flood fill starting at pixel (0,0), marks all background pixels reachable
@@ -143,7 +143,7 @@ def identify_characters_borders(array):
 
 
 
-# Character mask
+# character mask
 
 def make_character_mask(labels, character_regions):
     """
@@ -162,8 +162,7 @@ def make_character_mask(labels, character_regions):
 def visualize_graph(img_bgr, graph: BorderGraph, cropped,
                     row_offset, col_offset,
                     output_path="output_visualization.png"):
-    """
- Parameters:
+    """ Parameters:
         img_bgr: original colour image to draw on
         graph: the BorderGraph built from the character mask
         cropped: the cropped binary array (needed for its shape)
@@ -221,7 +220,7 @@ def visualize_graph(img_bgr, graph: BorderGraph, cropped,
         """Convert a cropped col coordinate to a full-image col, clamped to [0, w-1]."""
         return max(0, min(int(c) + col_offset, w - 1))
 
-    """ Layer 1: Blue lines — raw (pre-shrink) gap boundaries
+    """ Layer 1: Blue lines, raw (pre-shrink) gap boundaries
     Each GapEdge stores x1 and x2: the two boundaries of the gap it represents.
     For a horizontal edge (gap runs left-right between two col basins):
         x1 = rightmost col of the left basin  (left wall of the gap)
@@ -300,7 +299,7 @@ def visualize_graph(img_bgr, graph: BorderGraph, cropped,
     graph whose nodes sit at the actual shrunk boundary positions.
     We draw every edge in that graph as a simple pink line. """
 
-    PINK = (180, 105, 255)   # BGR colour for the shrunk boundary lines
+    PINK = (180, 105, 255)   # BGR color for the shrunk boundary lines
     DARK_PINK = (120, 50, 180)   # darker shade used for the shrunk node squares
 
     shrunk_graph = graph.build_shrunk_graph()
@@ -469,7 +468,7 @@ def main():
     """Step 5: find basins
     A basin is a contiguous run of rows (or columns) where the ink density
     falls below `threshold`. These are the gaps between rows/columns of text.
-    merge_threshold merges basins that are very close together (≤ 3 px apart)
+    merge_threshold merges basins that are very close together (<= 3 px apart)
     to avoid splitting a single gap into two basins due to a stray ink pixel. """
     print(f"finding basins (threshold={threshold}, merge_threshold={merge_threshold})...")
     row_basins = find_basins(char_mask, 'row', threshold, merge_threshold=merge_threshold)
