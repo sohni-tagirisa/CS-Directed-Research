@@ -345,7 +345,7 @@ class BorderGraph:
         calling node.neighbors() without ever touching self.edges.
         """
         # horizontal edges: walk along each row basin and connect neighboring column basins
-        # e.g. if there are 5 col basins in a row, this creates 4 horizontal edges per row
+        # ex. if there are 5 col basins in a row, this creates 4 horizontal edges per row
         for rb in self.row_basins:
             row = basin_center(rb)
             for i in range(len(self.col_basins) - 1):
@@ -358,7 +358,7 @@ class BorderGraph:
                 node_a = self.nodes[(row, col_a)]
                 node_b = self.nodes[(row, col_b)]
                 # the actual gap between these two col basins runs from the
-                # end of cb_a to the start of cb_b,  use those as raw endpoints
+                # end of cb_a to the start of cb_b, use those as raw endpoints
                 # so the shrink walks inward from the real gap boundaries,
                 # not from the node centers
                 gap_x1 = cb_a[1] # rightmost col of the left basin
@@ -661,8 +661,8 @@ class BorderGraph:
             return []
 
         visited = set()   # nodes we've already processed
-        queue   = [start] # nodes waiting to be processed, starting with the root
-        order   = []      # the final list of nodes in visit order
+        queue = [start] # nodes waiting to be processed, starting with the root
+        order = []      # the final list of nodes in visit order
 
         while queue:
             # take the next node off the front of the queue
@@ -710,8 +710,8 @@ class BorderGraph:
 
         shrunk_nodes = {}  # (row, col) -> ShrunkNode
         shrunk_edges = []
-        seen_edges   = set()  # tracks which node pairs already have an edge
-        seen_ticks   = set()  # tracks which tick positions have been drawn:
+        seen_edges = set()  # tracks which node pairs already have an edge
+        seen_ticks = set()  # tracks which tick positions have been drawn:
                               # H-edge ticks keyed by (row_basin_center, c)
                               # V-edge ticks keyed by (r, col_basin_center)
 
