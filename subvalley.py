@@ -22,9 +22,9 @@ BorderGraph:
     - weak edges flagged (strength < threshold, unreliable)
 """
 
-""" This import makes all type annotations in this file lazy (treated as strings)
-rather than evaluated immediately. this lets us reference GapEdge inside GapNode
-and GapNode inside GapEdge without python complaining that one isn't defined yet."""
+# This import makes all type annotations in this file lazy (treated as strings)
+# rather than evaluated immediately. This lets us reference GapEdge inside
+# GapNode and GapNode inside GapEdge without forward-declaration errors.
 from __future__ import annotations
 
 # dataclass lets us define simple data-holding classes without writing __init__ manually.
